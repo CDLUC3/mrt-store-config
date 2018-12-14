@@ -1,0 +1,14 @@
+name: Primary
+description: Primary UC3 storage node
+nodeScheme: CAN/0.9/1.0
+branchScheme: Pairtree/0.1/1.0
+leafScheme: Dflat/0.20/1.0
+classScheme: CLOP/0.3
+mediaType: magnetic-disk
+mediaConnectivity: unknown
+accessMode: on-line
+accessProtocol: unknown
+verifyOnRead: true
+verifyOnWrite: true
+supportURI: mailto:merritt-support@ucop.edu
+identifier: 4101

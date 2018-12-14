@@ -1,0 +1,9 @@
+#/mrt-ucla-stg/repository/node8001UCLA
+/dpr2store/repository/node9901Cloud
+/dpr2store/repository/node9001Distributed
+/dpr2store/repository/node2111
+/dpr2store/repository/node5001AWS
+/dpr2store/repository/node6001AWS
+/dpr2store/repository/nodeUNM
+#/dpr2store/repository/node3012
+/dpr2store/repository/node3042Dryad

@@ -1,0 +1,18 @@
+name: node3012
+description: UCSB storage node - Local stage/Remote stage
+nodeScheme: CAN/0.9/1.0
+branchScheme: Pairtree/0.1/1.0
+leafScheme: Dflat/0.20/1.0
+classScheme: CLOP/0.3
+verifyOnRead: true
+verifyOnWrite: true
+supportURI: mailto:merritt-support@ucop.edu
+identifier: 3012
+mediaType: content-addressable
+mediaConnectivity: cloud
+accessMode: on-line
+accessProtocol: s3
+externalProvider: nodeio
+logicalVolume: nodes-ch-ucdn|7032
+producerFilterFile=/apps/dpr2store/mrtHomes/store/store-info.txt
+#testOk: no 

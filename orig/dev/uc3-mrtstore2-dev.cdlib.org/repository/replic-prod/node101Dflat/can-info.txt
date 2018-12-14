@@ -1,0 +1,15 @@
+name: Primary Dev
+description: UC3 dev dflat storage node
+nodeScheme: CAN/0.9/1.0
+branchScheme: Pairtree/0.1/1.0
+leafScheme: Dflat/0.20/1.0
+classScheme: CLOP/0.3
+mediaType: magnetic-disk
+mediaConnectivity: san
+accessMode: on-line
+accessProtocol: zfs
+verifyOnRead: true
+nodeProtocol: file
+verifyOnWrite: true
+supportURI: mailto:merritt-support@ucop.edu
+identifier: 101
