@@ -16,3 +16,4 @@ accessMode: near-line
 accessProtocol: s3
 externalProvider: aws
 logicalVolume: uc3-s3mrt6001-prd|Standard
+producerFilterFile=/apps/dpr2store/mrtHomes/store/store-info.txt
