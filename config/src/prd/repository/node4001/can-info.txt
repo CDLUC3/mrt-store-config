@@ -1,0 +1,17 @@
+name: node4001
+description: NodeIO storage node
+nodeScheme: CAN/0.9/1.0
+branchScheme: Pairtree/0.1/1.0
+leafScheme: Dflat/0.20/1.0
+classScheme: CLOP/0.3
+verifyOnRead: true
+verifyOnWrite: true
+supportURI: mailto:merritt-support@ucop.edu
+identifier: 4001
+mediaType: content-addressable
+mediaConnectivity: cloud
+accessMode: on-line
+accessProtocol: s3
+externalProvider: nodeio
+logicalVolume: nodes-ch-unm|7101
+producerFilterFile=/dpr2store/mrtHomes/store/store-info.txt
