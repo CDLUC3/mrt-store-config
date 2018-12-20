@@ -45,12 +45,21 @@ def base_uri(host)
   "http://#{fq(host)}:35121"
 end
 
+def full_env(env)
+  @full_envs ||= {
+    dev: 'development',
+    stg: 'staging',
+    prd: 'production'
+  }
+  @full_envs[env]
+end
+
 ############################################################
 # Main program
 
 env_to_hosts.each do |env, hosts|
   FileUtils.mkdir_p(deploy_dir)
-  cap_env_rb = deploy_dir + "#{env}.rb"
+  cap_env_rb = deploy_dir + "#{full_env(env)}.rb"
   puts "Writing #{cap_env_rb}"
   File.open(cap_env_rb, 'w') do |f|
     host_configs = hosts.map do |host|

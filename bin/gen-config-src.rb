@@ -29,8 +29,17 @@ end
 ############################################################
 # Utility methods
 
+def full_env(env)
+  @full_envs ||= {
+    dev: 'development',
+    stg: 'staging',
+    prd: 'production'
+  }
+  @full_envs[env]
+end
+
 def config_src_dir_for(env)
-  config_dir + 'src' + env
+  config_dir + 'src' + full_env(env)
 end
 
 def first_host_dir_for(env)
