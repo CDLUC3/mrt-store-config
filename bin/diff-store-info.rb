@@ -3,6 +3,7 @@
 
 require 'pathname'
 require 'fileutils'
+require 'tempfile'
 
 ############################################################
 # Accessors
@@ -76,7 +77,7 @@ envs.each do |env|
   store_info_0 = store_info_by_host[host_0]
   hosts_for_env.drop(1).each do |h|
     store_info_h = store_info_by_host[h]
-    diff = `diff -u #{store_info_0} #{store_info_h}`
+    diff = `diff -B -u -I '#{h}' -I '#{host_0}' #{store_info_0} #{store_info_h}`
     unless diff.empty?
       puts "\nstore-info.txt mismatch for #{env}:\n\n#{diff}"
       diffs << diff
