@@ -1,10 +1,16 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
 require 'pathname'
 require 'sshkit'
 require 'sshkit/dsl'
 
 include SSHKit::DSL
+
+project_dir ||= Pathname.new(__dir__).parent
+orig_dir = project_dir + 'orig'
+FileUtils.mkdir_p(orig_dir)
+Dir.chdir orig_dir
 
 user = 'dmoles'
 

@@ -24,7 +24,7 @@ def hosts
 end
 
 def project_dir
-  @project_dir ||= Pathname.new(__dir__)
+  @project_dir ||= Pathname.new(__dir__).parent
 end
 
 def orig_dir
@@ -65,6 +65,8 @@ end
 ############################################################
 # Main program
 
+diffs = []
+
 envs.each do |env|
   hosts_for_env = hosts_for(env)
   store_info_by_host = hosts_for_env.map { |host| [host, store_info_txt(env, host)] }.to_h
@@ -75,6 +77,11 @@ envs.each do |env|
   hosts_for_env.drop(1).each do |h|
     store_info_h = store_info_by_host[h]
     diff = `diff -u #{store_info_0} #{store_info_h}`
-    puts "\nstore-info.txt mismatch for #{env}:\n\n#{diff}" unless diff.empty?
+    unless diff.empty?
+      puts "\nstore-info.txt mismatch for #{env}:\n\n#{diff}"
+      diffs << diff
+    end
   end
 end
+
+exit(1) unless diffs.empty?

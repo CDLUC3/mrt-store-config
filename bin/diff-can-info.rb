@@ -24,7 +24,7 @@ def hosts
 end
 
 def project_dir
-  @project_dir ||= Pathname.new(__dir__)
+  @project_dir ||= Pathname.new(__dir__).parent
 end
 
 def orig_dir
@@ -86,6 +86,8 @@ end
 ############################################################
 # Main program
 
+diffs = []
+
 envs.each do |env|
   env_node_dirs(env).each do |node|
     hosts_for_env = hosts_for(env)
@@ -97,7 +99,12 @@ envs.each do |env|
     hosts_for_env.drop(1).each do |h|
       can_info_h = can_info_by_host[h]
       diff = `diff -u #{can_info_0} #{can_info_h}`
-      puts "\ncan-info.txt mismatch for #{env}:\n\n#{diff}" unless diff.empty?
+      unless diff.empty?
+        puts "\ncan-info.txt mismatch for #{env}:\n\n#{diff}"
+        diffs << diff
+      end
     end
   end
 end
+
+exit(1) unless diffs.empty?
