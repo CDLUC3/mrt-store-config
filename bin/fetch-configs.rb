@@ -12,7 +12,7 @@ orig_dir = project_dir + 'orig'
 FileUtils.mkdir_p(orig_dir)
 Dir.chdir orig_dir
 
-user = 'dmoles'
+user = 'dpr2store'
 
 env_to_hosts = {
   dev: ['uc3-mrtstore2-dev'],
