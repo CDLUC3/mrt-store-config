@@ -35,11 +35,11 @@ def full_env(env)
     stg: 'stage',
     prd: 'production'
   }
-  @full_envs[env]
+  @full_envs[env.to_sym]
 end
 
 def config_src_dir_for(env)
-  config_dir + 'src' + full_env(env)
+  (config_dir + 'src') + full_env(env)
 end
 
 def first_host_dir_for(env)
@@ -80,14 +80,22 @@ end
 ############################################################
 # Main program
 
+unless File.directory?(orig_dir)
+  $stderr.puts("Directory #{orig_dir} not found; did you run fetch-configs.rb?")
+  exit(1)
+end
+
 Dir.chdir(project_dir)
 
-# fail unless system('bin/fetch_configs.rb')
-fail unless system('bin/diff-nodes-txt.rb')
-fail unless system('bin/diff-store-info.rb')
-fail unless system('bin/diff-can-info.rb')
+# exit(1) unless system('bin/fetch_configs.rb')
+exit(1) unless system('bin/diff-nodes-txt.rb')
+exit(1) unless system('bin/diff-store-info.rb')
+exit(1) unless system('bin/diff-can-info.rb')
+
+FileUtils.remove_dir(config_dir + 'src', true)
 
 envs.each do |env|
+  puts "Generating config files for environment: #{env}"
   config_src_dir = config_src_dir_for(env)
   orig_host_dir = first_host_dir_for(env)
 
