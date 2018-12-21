@@ -15,5 +15,5 @@ set :local_user, git_user_email.empty? ? fetch(:local_user) : git_user_email
 ## TODO: prompt for branch/tag?
 
 namespace :deploy do
-
+# TODO: symlink files etc.
 end
