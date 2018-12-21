@@ -4,11 +4,10 @@ Private configuration for [https://github.com/CDLUC3/mrt-store](mrt-store).
 
 ## Usage
 
-⚠️ **Work in progress**
-
 1. Make sure any changes to this project have been pushed to GitHub. (Capistrano always
    deploys from the most recent GitHub release, regardless of any changes made in the
    repository you run it from.)
+
 2. From the project root:
 
    ```
@@ -23,10 +22,25 @@ Capistrano deploys this repository to each server in the environment under
 `/apps/dpr2store/apps/mrt-store-config/`, with the usual `releases/current -> releases/<SHA hash>`
 symlink structure, supporting rollbacks etc.
 
+After deployment, the deploy script
+
+1. uses the `identifier` and `base_uri` properties configured for each server to create a
+   `store-info.txt` file from the deployed `store-info.txt.erb` (under `apps/mrt-store-config/current/config/src/<ENV>/store`).
+
+2. creates the following symlinks, renaming existing (non-symlinked) files if necessary:
+
+   | From `/apps/dpr2store/` | To `/apps/dpr2store/` |
+   | --- | --- |
+   | `mrtHomes/store/nodes.txt` | `apps/mrt-store-config/current/config/src/<ENV>/store/nodes.txt` |
+   | `mrtHomes/store/store-info.txt`| `apps/mrt-store-config/current/config/src/<ENV>/store/store-info.txt` |
+   | `repository/<NODE>/can-info.txt`| `apps/mrt-store-config/current/config/src/<ENV>/repository/<NODE>/can-info.txt`|
+
+   A `can-info.txt` symlink is created for each node defined in `nodes.txt`; any existing node directories
+   not listed in `nodes.txt` are ignored, but the script will print a warning.
+
 ## Notes
 
-The Capistrano deployment and the `fetch-configs.rb` script below both assume that
-the current (local) user has SSH access to:
+The Capistrano deployment assumes that the current (local) user has SSH access to:
 
 1. the `dpr2store` account on the target server, and
 2. this repository. 

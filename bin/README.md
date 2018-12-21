@@ -8,6 +8,9 @@ to run them again, but they're included here for historical purposes.
 Downloads original `nodes.txt`, `store-info.txt`, and `can-info.txt` 
 configuration files from storage servers to (local) `orig` directory.
 
+Like the Capistrano deploy script, this script assumes the local user has SSH access to
+the `dpr2store` account on the target server.
+
 Note that this script seems to sometimes fail with an **SSHKit::Runner:ExecuteError** **No route to host**
 when run over the VPN. Running it again seems to solve the problem.
 
