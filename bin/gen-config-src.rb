@@ -32,7 +32,7 @@ end
 def full_env(env)
   @full_envs ||= {
     dev: 'development',
-    stg: 'staging',
+    stg: 'stage',
     prd: 'production'
   }
   @full_envs[env]
