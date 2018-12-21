@@ -2,22 +2,6 @@
 
 Private configuration for [https://github.com/CDLUC3/mrt-store](mrt-store).
 
-## Usage
-
-1. Make sure any changes to this project have been pushed to GitHub. (Capistrano always
-   deploys from the most recent GitHub release, regardless of any changes made in the
-   repository you run it from.)
-
-2. From the project root:
-
-   ```
-   [TAG=<TAG>] bundle exec cap <ENV> deploy
-   ```
-
-   where `<ENV>` is one of `development`, `stage`, `production` (as defined by the scripts
-   in the [`config/deploy`](config/deploy) directory), and `<TAG>` is an optional Git tag
-   for this repository.
-
 Capistrano deploys this repository to each server in the environment under 
 `/apps/dpr2store/apps/mrt-store-config/`, with the usual `releases/current -> releases/<SHA hash>`
 symlink structure, supporting rollbacks etc.
@@ -37,6 +21,22 @@ After deployment, the deploy script
 
    A `can-info.txt` symlink is created for each node defined in `nodes.txt`; any existing node directories
    not listed in `nodes.txt` are ignored, but the script will print a warning.
+
+## Usage
+
+1. Make sure any changes to this project have been pushed to GitHub. (Capistrano always
+   deploys from the most recent GitHub release, regardless of any changes made in the
+   repository you run it from.)
+
+2. From the project root:
+
+   ```
+   [TAG=<TAG>] bundle exec cap <ENV> deploy
+   ```
+
+   where `<ENV>` is one of `development`, `stage`, `production` (as defined by the scripts
+   in the [`config/deploy`](config/deploy) directory), and `<TAG>` is an optional Git tag
+   for this repository.
 
 ## Notes
 
