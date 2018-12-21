@@ -29,13 +29,14 @@ after 'deploy:set_current_revision', 'deploy:gen_store_info'
 namespace :deploy do
   desc 'Generate store-info.txt from ERB template'
   task :gen_store_info do
-    env = fetch(:stage) # yes, 'stage' means something different to Capistrano
+    env = fetch(:stage) # yes, 'stage' means 'environment' to Capistrano
     on roles(:all) do |server|
       within "#{release_path}/config/src/#{env}/store" do
         # Use the deployed ERB, not the local copy
         store_info_template = download!('store-info.txt.erb')
         store_info_erb = ERB.new(store_info_template)
         store_info_txt = store_info_erb.result_with_hash(
+          # These are set for each server in config/deploy/<ENV>.rb
           identifier: server.properties.identifier,
           base_uri: server.properties.base_uri
         )
