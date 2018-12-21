@@ -12,11 +12,12 @@ Private configuration for [https://github.com/CDLUC3/mrt-store](mrt-store).
 2. From the project root:
 
    ```
-   bundle exec cap <ENV> deploy
+   [TAG=<TAG>] bundle exec cap <ENV> deploy
    ```
 
    where `<ENV>` is one of `development`, `stage`, `production` (as defined by the scripts
-   in the [`config/deploy`](config/deploy)) directory.
+   in the [`config/deploy`](config/deploy) directory), and `<TAG>` is an optional Git tag
+   for this repository.
 
 ## Notes
 

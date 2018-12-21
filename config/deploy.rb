@@ -12,7 +12,18 @@ set :repo_url, 'git@github.com:cdlib/mrt-store-config.git'
 git_user_email = `git config user.email`.to_s.strip
 set :local_user, git_user_email.empty? ? fetch(:local_user) : git_user_email
 
-## TODO: prompt for branch/tag?
+before 'deploy', 'git:prompt_for_tag'
+namespace :git do
+  desc 'Prompt for tag'
+  task :prompt_for_tag do
+    if (tag = ENV['TAG'])
+      set :branch, tag
+    else
+      ask :branch, 'master'
+    end
+    puts ":branch set to #{fetch(:branch)}"
+  end
+end
 
 after 'deploy:set_current_revision', 'deploy:gen_store_info'
 namespace :deploy do
