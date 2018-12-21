@@ -14,6 +14,23 @@ set :local_user, git_user_email.empty? ? fetch(:local_user) : git_user_email
 
 ## TODO: prompt for branch/tag?
 
+after 'deploy:set_current_revision', 'deploy:gen_store_info'
 namespace :deploy do
+  desc 'Generate store-info.txt from ERB template'
+  task :gen_store_info do
+    env = fetch(:stage) # yes, 'stage' means something different to Capistrano
+    on roles(:all) do |server|
+      within "#{release_path}/config/src/#{env}/store" do
+        # Use the deployed ERB, not the local copy
+        store_info_template = download!('store-info.txt.erb')
+        store_info_erb = ERB.new(store_info_template)
+        store_info_txt = store_info_erb.result_with_hash(
+          identifier: server.properties.identifier,
+          base_uri: server.properties.base_uri
+        )
+        upload!(StringIO.new(store_info_txt), 'store-info.txt', mode: 0644)
+      end
+    end
+  end
 # TODO: symlink files etc.
 end
