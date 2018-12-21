@@ -68,7 +68,7 @@ end
 def store_info_erb_lines(env)
   orig_host_dir = first_host_dir_for(env)
   orig_nodes_txt = orig_host_dir + 'store/store-info.txt'
-  File.read(orig_nodes_txt).gsub(/^#[^\n]+\n/, '').split.map(&method(:to_erb_line))
+  File.read(orig_nodes_txt).gsub(/^#[^\n]+\n/, '').split("\n").map(&method(:to_erb_line))
 end
 
 def to_erb_line(line)
