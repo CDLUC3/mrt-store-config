@@ -12,7 +12,6 @@ set :repo_url, 'git@github.com:cdlib/mrt-store-config.git'
 git_user_email = `git config user.email`.to_s.strip
 set :local_user, git_user_email.empty? ? fetch(:local_user) : git_user_email
 
-before 'deploy', 'git:prompt_for_tag'
 namespace :git do
   desc 'Prompt for tag'
   task :prompt_for_tag do
@@ -25,7 +24,6 @@ namespace :git do
   end
 end
 
-after 'deploy:set_current_revision', 'deploy:gen_store_info'
 namespace :deploy do
   desc 'Generate store-info.txt from ERB template'
   task :gen_store_info do
@@ -44,5 +42,37 @@ namespace :deploy do
       end
     end
   end
-# TODO: symlink files etc.
+
+  namespace :symlink do
+    desc 'Symlink nodes.txt and store-info.txt into mrtHomes directory'
+    task :mrt_homes do
+      env = fetch(:stage) # yes, 'stage' means 'environment' to Capistrano
+      deployed_store = Pathname.new("#{current_path}/config/src/#{env}/store")
+      mrt_homes_store = Pathname.new("/apps/#{role_account}/mrtHomes/store")
+      on roles(:all) do |_|
+        within mrt_homes_store do
+          %w(nodes.txt store-info.txt).each do |filename|
+            if test('[', '-L', filename, ']')
+              info "#{filename} already symlinked"
+              next
+            end
+            if test('[', '-f', filename, ']')
+              new_name = "#{filename}.#{Time.now.to_i}"
+              warn "#{filename} exists, but is a plain file; renaming to #{new_name}"
+              execute(:mv, filename, new_name)
+            end
+            deployed_file_path = deployed_store + filename
+            info "Creating symlink to #{deployed_file_path}"
+            execute(:ln, '-s', deployed_file_path, filename)
+          end
+        end
+      end
+    end
+
+    # TODO: symlink individual nodes
+  end
 end
+
+before 'deploy', 'git:prompt_for_tag'
+after 'deploy:set_current_revision', 'deploy:gen_store_info'
+after 'deploy:symlink:release', 'deploy:symlink:mrt_homes'
