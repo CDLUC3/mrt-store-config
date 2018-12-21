@@ -12,6 +12,8 @@ set :repo_url, 'git@github.com:cdlib/mrt-store-config.git'
 git_user_email = `git config user.email`.to_s.strip
 set :local_user, git_user_email.empty? ? fetch(:local_user) : git_user_email
 
+## TODO: prompt for branch/tag?
+
 namespace :deploy do
 
 end
