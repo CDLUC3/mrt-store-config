@@ -50,18 +50,17 @@ namespace :deploy do
       mrt_homes_store_dir = Pathname.new("/apps/#{role_account}/mrtHomes/store")
       deployed_store_dir = Pathname.new("#{current_path}/config/src/#{env}/store")
       on roles(:all) do |_|
+        info "Entering mrtHomes directory #{mrt_homes_store_dir}"
         within mrt_homes_store_dir do
           %w(nodes.txt store-info.txt).each do |filename|
             info "Checking #{filename} symlink"
 
-            # See if symlink already exists
             if test('[', '-L', filename, ']')
-              info "#{filename} already symlinked"
-              next
-            end
-
-            # Move existing file, if present
-            if test('[', '-f', filename, ']')
+              # Delete existing symlink (target could have moved)
+              info "removing existing #{filename} symlink"
+              execute(:rm, filename)
+            elsif test('[', '-f', filename, ']')
+              # Move existing plain file
               new_name = "#{filename}.#{Time.now.to_i}"
               warn "#{filename} exists, but is a plain file; renaming to #{new_name}"
               execute(:mv, filename, new_name)
@@ -84,10 +83,12 @@ namespace :deploy do
       on roles(:all) do |_|
         # Use the deployed nodes.txt, not the local copy
         nodes_txt = download!(deployed_store_dir + 'nodes.txt')
-        known_nodes = nodes_txt.gsub("#{repo_dir}/", '').split("\n")
+        known_nodes = nodes_txt.gsub(%r{(/apps)?/#{role_account}/repository/}, '').split("\n")
+        info "Entering repository directory #{repo_dir}"
         within(repo_dir) do
           known_nodes.each do |node|
             info "Checking can-info.txt symlink for #{node}"
+            can_info = Pathname.new(node) + 'can-info.txt'
 
             # Ensure node directory exists
             unless test('[', '-d', node, ']')
@@ -95,22 +96,19 @@ namespace :deploy do
               execute :mkdir, node
             end
 
-            # See if symlink already exists
-            can_info = Pathname.new(node) + 'can-info.txt'
             if test('[', '-L', can_info, ']')
-              info "#{can_info} already symlinked"
-              next
-            end
-
-            # Move existing file, if present
-            if test('[', '-f', can_info, ']')
+              # Delete existing symlink (target could have moved)
+              info "removing existing #{can_info} symlink"
+              execute(:rm, can_info)
+            elsif test('[', '-f', can_info, ']')
+              # Move existing plain file
               new_name = "#{can_info}.#{Time.now.to_i}"
               warn "#{can_info} exists, but is a plain file; renaming to #{new_name}"
               execute(:mv, can_info, new_name)
             end
 
             # Create symlink
-            deployed_can_info = deployed_repo_dir + can_info
+            deployed_can_info = (deployed_repo_dir + node) + 'can-info.txt'
             info "Creating symlink to #{deployed_can_info}"
             execute(:ln, '-s', deployed_can_info, can_info)
           end
