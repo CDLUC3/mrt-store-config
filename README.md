@@ -1,6 +1,6 @@
 # mrt-store-config
 
-Private configuration for [https://github.com/CDLUC3/mrt-store](mrt-store).
+[https://github.com/CDLUC3/mrt-store](mrt-store) storage node configuration.
 
 Capistrano deploys this repository to each server in the environment under 
 `/apps/dpr2store/apps/mrt-store-config/`, with the usual `releases/current -> releases/<SHA hash>`

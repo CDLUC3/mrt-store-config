@@ -6,7 +6,7 @@ set :ssh_options, user: role_account, forward_agent: true
 
 set :application, 'mrt-store-config'
 set :deploy_to, "/apps/#{role_account}/apps/#{fetch(:application)}"
-set :repo_url, 'git@github.com:cdlib/mrt-store-config.git'
+set :repo_url, 'git@github.com:CDLUC3/mrt-store-config.git'
 
 # Use email address rather than username in revision log, if possible
 git_user_email = `git config user.email`.to_s.strip
