@@ -14,6 +14,6 @@ mediaType: content-addressable
 mediaConnectivity: cloud
 accessMode: on-line
 accessProtocol: s3
-externalProvider: aws
-logicalVolume: uc3-s3mrt5001-stg|ReducedRedundancy
+externalProvider: nodeio
+logicalVolume: nodes-stg-store|5001
 producerFilterFile=/apps/dpr2store/mrtHomes/store/store-info.txt

@@ -14,5 +14,5 @@ mediaType: content-addressable
 mediaConnectivity: cloud
 accessMode: near-line
 accessProtocol: s3
-externalProvider: aws
-logicalVolume: uc3-s3mrt6001-stg|Standard
+externalProvider: nodeio
+logicalVolume: nodes-stg-store|6001

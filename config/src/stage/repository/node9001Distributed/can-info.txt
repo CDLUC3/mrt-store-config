@@ -12,6 +12,6 @@ mediaType: content-addressable
 mediaConnectivity: cloud
 accessMode: on-line
 accessProtocol: s3
-externalProvider: SDSC
-logicalVolume: distrib.stage.9001.__
+externalProvider: nodeio
+logicalVolume: nodes-stg-store|9001
 producerFilterFile=/apps/dpr2store/mrtHomes/store/store-info.txt
