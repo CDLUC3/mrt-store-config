@@ -4,5 +4,5 @@
 /dpr2store/repository/node6001AWS
 /dpr2store/repository/node9001Distributed
 /dpr2store/repository/node9901Cloud
-/dpr2store/repository/nodeUNM
+/dpr2store/repository/node4101UNM
 /dpr2store/repository/node9502SDSCMinio

@@ -1,5 +1,5 @@
-name: node3042Dryad
-description: Dryad - Local stage/Remote stage
+name: Primary
+description: Primary UC3 dev storage node
 nodeScheme: CAN/0.9/1.0
 branchScheme: Pairtree/0.1/1.0
 leafScheme: Dflat/0.20/1.0
@@ -7,12 +7,11 @@ classScheme: CLOP/0.3
 verifyOnRead: true
 verifyOnWrite: true
 supportURI: mailto:merritt-support@ucop.edu
-identifier: 3042
+identifier: 4101
 mediaType: content-addressable
 mediaConnectivity: cloud
 accessMode: on-line
 accessProtocol: s3
 externalProvider: nodeio
-logicalVolume: nodes-stg-store|3042
+logicalVolume: nodes-stg-store|4101
 producerFilterFile=/apps/dpr2store/mrtHomes/store/store-info.txt
-#testOk: no 
