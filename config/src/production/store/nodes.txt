@@ -1,7 +1,7 @@
-/dpr2store/repository/node3031UCSB
-/dpr2store/repository/node3041Dryad
-/dpr2store/repository/node4001
+/dpr2store/repository/node9103Cloud
+/dpr2store/repository/node9001Distributed
 /dpr2store/repository/node5001AWS
 /dpr2store/repository/node6001AWS
-/dpr2store/repository/node9001Distributed
-/dpr2store/repository/node9103Cloud
+/dpr2store/repository/node4001UNM
+/dpr2store/repository/node3041Dryad
+/dpr2store/repository/node9501Minio

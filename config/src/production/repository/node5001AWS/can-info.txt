@@ -15,5 +15,5 @@ mediaType: content-addressable
 mediaConnectivity: cloud
 accessMode: on-line
 accessProtocol: s3
-externalProvider: aws
-logicalVolume: uc3-s3mrt5001-prd
+externalProvider: nodeio
+logicalVolume: nodes-prd-store|5001

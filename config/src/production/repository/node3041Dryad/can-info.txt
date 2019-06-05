@@ -13,6 +13,6 @@ mediaConnectivity: cloud
 accessMode: on-line
 accessProtocol: s3
 externalProvider: nodeio
-logicalVolume: nodes-ch-ucdn|7041
+logicalVolume: nodes-prd-store|3041
 producerFilterFile=/apps/dpr2store/mrtHomes/store/store-info.txt
 #testOk: no 

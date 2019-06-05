@@ -14,6 +14,6 @@ mediaType: content-addressable
 mediaConnectivity: cloud
 accessMode: near-line
 accessProtocol: s3
-externalProvider: aws
-logicalVolume: uc3-s3mrt6001-prd|Standard
+externalProvider: nodeio
+logicalVolume: nodes-prd-store|6001
 producerFilterFile=/apps/dpr2store/mrtHomes/store/store-info.txt
